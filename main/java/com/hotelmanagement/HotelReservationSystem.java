@@ -1,5 +1,6 @@
 package com.hotelmanagement;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +27,14 @@ public class HotelReservationSystem
         String startDate = sc.nextLine();
         System.out.println("Enter End Date (in ddMMMyyyy format):");
         String endDate = sc.nextLine();
-        //long totaldays = totalDays(startDate, endDate);
+        try
+        {
+            long totaldays = totalDays(startDate, endDate);
+        }
+        catch (ParseException e)
+        {
+            System.out.println("Invalid date format! Correct format: ddMMMyyyy");
+        }
         //Integer weekdayPrice = lowestPrice(weekDayHotels);
         //String weekdayHotel = cheapestHotel(weekdayPrice, weekDayHotels);
         //Integer weekendPrice = lowestPrice(weekEndHotels);
@@ -114,9 +122,9 @@ public class HotelReservationSystem
         long weekdays = calcWeekDays(startDate, endDate);
         long weekends = totaldays - weekdays;
         HashMap<Integer, Long> a = new HashMap<Integer, Long>();
-        a.put(3, (availabeHotels.get("Lakewood").getRegularWeekdayRate()*weekdays)+(availabeHotels.get("Lakewood").getRegularWeekendRate()*weekends));
-        a.put(4, (availabeHotels.get("Bridgewood").getRegularWeekdayRate()*weekdays)+(availabeHotels.get("Bridgewood").getRegularWeekendRate()*weekends));
-        a.put(5, (availabeHotels.get("Ridgewood").getRegularWeekdayRate()*weekdays)+(availabeHotels.get("Ridgewood").getRegularWeekendRate()*weekends));
+        a.put(3, (availabeHotels.get("Lakewood").getRewardWeekdayRate()*weekdays)+(availabeHotels.get("Lakewood").getRewardWeekendRate()*weekends));
+        a.put(4, (availabeHotels.get("Bridgewood").getRewardWeekdayRate()*weekdays)+(availabeHotels.get("Bridgewood").getRewardWeekendRate()*weekends));
+        a.put(5, (availabeHotels.get("Ridgewood").getRewardWeekdayRate()*weekdays)+(availabeHotels.get("Ridgewood").getRewardWeekendRate()*weekends));
         List<Integer> b;
         b = a.entrySet()
                 .stream()
@@ -126,9 +134,4 @@ public class HotelReservationSystem
         return (rateofHotels.get(b.get(0)));
     }
 
-    public static void bestRatedHotel(String startDate, String endDate)
-    {
-
-
-    }
 }

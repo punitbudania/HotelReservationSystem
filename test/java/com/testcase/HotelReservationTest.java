@@ -81,4 +81,20 @@ public class HotelReservationTest
         Long tPrice = (availabeHotels.get(hName).getRegularWeekdayRate()*weekdays)+(availabeHotels.get(hName).getRegularWeekendRate()*weekends);
         System.out.println(hName + " & Total Rate = " + tPrice);
     }
+
+    @Test
+    public void givenDateRange_SearchHotel_ReturnCheapestBestRatedHotelforRewardCust()
+    {
+        addHotelToSystem("Lakewood", 110, 90, 3, 80, 80);
+        addHotelToSystem("Bridgewood",160, 50,4, 110, 50);
+        addHotelToSystem("Ridgewood", 220, 150, 5, 100, 40);
+        String hName = cheapestBestRatedHotel("11Sep2020", "12Sep2020");
+        long totaldays = totalDays("11Sep2020", "12Sep2020");
+        long weekdays = calcWeekDays("11Sep2020", "12Sep2020");
+        long weekends = totaldays - weekdays;
+        Integer rating = availabeHotels.get(hName).gethotelRating();
+        Long price = (availabeHotels.get(hName).getRewardWeekdayRate()*weekdays)+(availabeHotels.get(hName).getRewardWeekendRate()*weekends);
+        System.out.println(hName + ", Rating: " + rating + " & Total Rate: " + price );
+        Assertions.assertEquals("Ridgewood", hName);
+    }
 }
