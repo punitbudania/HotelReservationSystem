@@ -46,4 +46,15 @@ public class HotelReservationTest
                 + " & Hotel for weekends: " + cheapestHotel(lowestPrice(weekEndHotels), weekEndHotels)
                 + "with total price = " + (weekdayPrice+weekendPrice));
     }
+
+    @Test
+    public void givenDateRange_SearchHotel_ReturnCheapestBestRatedHotel()
+
+    {
+        addHotelToSystem("Lakewood", 110, 90,3);
+        addHotelToSystem("Bridgewood",160, 50, 4);
+        addHotelToSystem("Ridgewood", 220, 150, 5);
+        String hName = cheapestBestRatedHotel("11Sep2020", "12Sep2020");
+        Assertions.assertEquals("Lakewood", hName);
+    }
 }

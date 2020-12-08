@@ -25,14 +25,14 @@ public class Hotel
         this.hotelName = hotelName;
     }
 
-    public Integer getRegularWeekdayRate()
-    {
-        return getRegularWeekdayRate();
-    }
-
     public void setRegularWeekdayRate(Integer regularWeekdayRate)
     {
         this.regularWeekdayRate = regularWeekdayRate;
+    }
+
+    public Integer getRegularWeekdayRate()
+    {
+        return regularWeekdayRate;
     }
 
     public Integer getRegularWeekendRate()

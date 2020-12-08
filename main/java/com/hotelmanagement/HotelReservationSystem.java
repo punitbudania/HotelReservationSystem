@@ -13,7 +13,7 @@ public class HotelReservationSystem
     public static HashMap<String, Hotel> availabeHotels = new HashMap<String, Hotel>();
     public static HashMap<String, Integer> weekDayHotels = new HashMap<String, Integer>();
     public static HashMap<String, Integer> weekEndHotels = new HashMap<String, Integer>();
-    public static HashMap<String, Integer> rateofHotels = new HashMap<String, Integer>();
+    public static HashMap<Integer, String> rateofHotels = new HashMap<Integer, String>();
 
     public static void main(String[] args)
     {
@@ -32,7 +32,7 @@ public class HotelReservationSystem
         //Integer weekendPrice = lowestPrice(weekEndHotels);
         //String weekendHotel = cheapestHotel(weekendPrice, weekEndHotels);
         //long weekdays = calcWeekDays(startDate, endDate);
-        //long weekendDays = totaldays - weekdays;
+        //long weekends = totaldays - weekdays;
     }
 
 
@@ -42,7 +42,7 @@ public class HotelReservationSystem
         availabeHotels.put(hotelName, hotel);
         weekDayHotels.put(hotelName, regularWeekdayRate);
         weekEndHotels.put(hotelName, regularWeekendRate);
-        rateofHotels.put(hotelName, hotelRating);
+        rateofHotels.put(hotelRating, hotelName);
     }
 
 
@@ -106,6 +106,25 @@ public class HotelReservationSystem
             }
         }
         return result;
+    }
+
+    public static String cheapestBestRatedHotel(String startDate, String endDate)
+    {
+        long totaldays = totalDays(startDate, endDate);
+        long weekdays = calcWeekDays(startDate, endDate);
+        long weekends = totaldays - weekdays;
+        HashMap<Integer, Long> a = new HashMap<Integer, Long>();
+        a.put(3, (availabeHotels.get("Lakewood").getRegularWeekdayRate()*weekdays)+(availabeHotels.get("Lakewood").getRegularWeekendRate()*weekends));
+        a.put(4, (availabeHotels.get("Bridgewood").getRegularWeekdayRate()*weekdays)+(availabeHotels.get("Bridgewood").getRegularWeekendRate()*weekends));
+        a.put(5, (availabeHotels.get("Ridgewood").getRegularWeekdayRate()*weekdays)+(availabeHotels.get("Ridgewood").getRegularWeekendRate()*weekends));
+        List<Integer> b;
+        b = a.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+        return (rateofHotels.get(b.get(0)));
+
     }
 
 }
