@@ -28,9 +28,22 @@ public class HotelReservationTest
         addHotelToSystem("Lakewood", 110, 90,3);
         addHotelToSystem("Bridgewood",160, 50, 4);
         addHotelToSystem("Ridgewood", 220, 150, 5);
-        String res = cheapestHotel(lowestPrice());
-        long result = totalDays("12Mar2020", "16Mar2020")*lowestPrice();
+        String res = cheapestHotel(lowestPrice(weekDayHotels), weekDayHotels);
+        long result = totalDays("12Mar2020", "16Mar2020")*lowestPrice(weekDayHotels);
         Assertions.assertEquals("Lakewood", res);
         Assertions.assertEquals(550, result);
+    }
+
+    @Test
+    public void givenDateRange_SearchHotel_ReturnCheapestHotelforWeekendAndWeekday()
+    {
+        addHotelToSystem("Lakewood", 110, 90,3);
+        addHotelToSystem("Bridgewood",160, 50, 4);
+        addHotelToSystem("Ridgewood", 220, 150, 5);
+        long weekdayPrice = calcWeekDays("11Sep2020", "12Sep2020")*lowestPrice(weekDayHotels);
+        long weekendPrice = (totalDays("11Sep2020", "12Sep2020") - calcWeekDays("11Sep2020", "12Sep2020"))*lowestPrice(weekEndHotels);
+        System.out.println("Hotel for weekdays: " + cheapestHotel(lowestPrice(weekDayHotels), weekDayHotels)
+                + " & Hotel for weekends: " + cheapestHotel(lowestPrice(weekEndHotels), weekEndHotels)
+                + "with total price = " + (weekdayPrice+weekendPrice));
     }
 }
