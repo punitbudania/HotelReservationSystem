@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -15,6 +16,7 @@ public class HotelReservationSystem
     public static HashMap<String, Integer> weekDayHotels = new HashMap<String, Integer>();
     public static HashMap<String, Integer> weekEndHotels = new HashMap<String, Integer>();
     public static HashMap<Integer, String> rateofHotels = new HashMap<Integer, String>();
+    public static final String DATE_FORMAT = "^[0-9]{2}[A-Z][a-z]{2}[0-9]{4}$";
 
     public static void main(String[] args)
     {
@@ -23,18 +25,30 @@ public class HotelReservationSystem
         addHotelToSystem("Lakewood", 110, 90, 3, 80, 80);
         addHotelToSystem("Bridgewood",160, 50,4, 110, 50);
         addHotelToSystem("Ridgewood", 220, 150, 5, 100, 40);
-        System.out.println("Enter Start Date (in ddMMMyyyy format):");
-        String startDate = sc.nextLine();
-        System.out.println("Enter End Date (in ddMMMyyyy format):");
-        String endDate = sc.nextLine();
         try
         {
-            long totaldays = totalDays(startDate, endDate);
+            System.out.println("Enter Start Date (in ddMMMyyyy format):");
+            String startDate = sc.nextLine();
+            Pattern pattern = Pattern.compile(DATE_FORMAT);
+            if (pattern.matcher(startDate).matches() == true)
+            {
+                System.out.println("Enter End Date (in ddMMMyyyy format):");
+                String endDate = sc.nextLine();
+                if(pattern.matcher(endDate).matches() == false)
+                {
+                    throw new customException("Invalid date format! Correct format: ddMMMyyyy");
+                }
+            }
+            else
+            {
+                throw new customException("Invalid date format! Correct format: ddMMMyyyy");
+            }
         }
-        catch (ParseException e)
+        catch (customException e)
         {
-            System.out.println("Invalid date format! Correct format: ddMMMyyyy");
+            System.out.println("customException: " + e.getMessage());
         }
+        //long totaldays = totalDays(startDate, endDate);
         //Integer weekdayPrice = lowestPrice(weekDayHotels);
         //String weekdayHotel = cheapestHotel(weekdayPrice, weekDayHotels);
         //Integer weekendPrice = lowestPrice(weekEndHotels);
