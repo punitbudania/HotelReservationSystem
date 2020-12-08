@@ -27,11 +27,8 @@ public class HotelReservationSystem
         System.out.println("Enter End Date (in ddMMMyyyy format):");
         String endDate = sc.nextLine();
         long days = totalDays(startDate, endDate);
-        //System.out.println(days);
         Integer price = lowestPrice();
-        //System.out.println(price);
         cheapestHotel(price);
-        //System.out.println(b);
     }
 
 
