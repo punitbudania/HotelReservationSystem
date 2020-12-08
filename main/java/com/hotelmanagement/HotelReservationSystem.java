@@ -136,9 +136,9 @@ public class HotelReservationSystem
         long weekdays = calcWeekDays(startDate, endDate);
         long weekends = totaldays - weekdays;
         HashMap<Integer, Long> a = new HashMap<Integer, Long>();
-        a.put(3, (availabeHotels.get("Lakewood").getRewardWeekdayRate()*weekdays)+(availabeHotels.get("Lakewood").getRewardWeekendRate()*weekends));
-        a.put(4, (availabeHotels.get("Bridgewood").getRewardWeekdayRate()*weekdays)+(availabeHotels.get("Bridgewood").getRewardWeekendRate()*weekends));
-        a.put(5, (availabeHotels.get("Ridgewood").getRewardWeekdayRate()*weekdays)+(availabeHotels.get("Ridgewood").getRewardWeekendRate()*weekends));
+        a.put(3, (availabeHotels.get("Lakewood").getRegularWeekdayRate()*weekdays)+(availabeHotels.get("Lakewood").getRegularWeekendRate()*weekends));
+        a.put(4, (availabeHotels.get("Bridgewood").getRegularWeekdayRate()*weekdays)+(availabeHotels.get("Bridgewood").getRegularWeekendRate()*weekends));
+        a.put(5, (availabeHotels.get("Ridgewood").getRegularWeekdayRate()*weekdays)+(availabeHotels.get("Ridgewood").getRegularWeekdayRate()*weekends));
         List<Integer> b;
         b = a.entrySet()
                 .stream()
