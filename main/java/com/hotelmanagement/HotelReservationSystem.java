@@ -19,9 +19,9 @@ public class HotelReservationSystem
     {
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcime to Hotel Reservation System");
-        addHotelToSystem("Lakewood", 110, 90, 3);
-        addHotelToSystem("Bridgewood",160, 50,4);
-        addHotelToSystem("Ridgewood", 220, 150, 5);
+        addHotelToSystem("Lakewood", 110, 90, 3, 80, 80);
+        addHotelToSystem("Bridgewood",160, 50,4, 110, 50);
+        addHotelToSystem("Ridgewood", 220, 150, 5, 100, 40);
         System.out.println("Enter Start Date (in ddMMMyyyy format):");
         String startDate = sc.nextLine();
         System.out.println("Enter End Date (in ddMMMyyyy format):");
@@ -36,9 +36,9 @@ public class HotelReservationSystem
     }
 
 
-    public static void addHotelToSystem(String hotelName, Integer regularWeekdayRate, Integer regularWeekendRate, Integer hotelRating)
+    public static void addHotelToSystem(String hotelName, Integer regularWeekdayRate, Integer regularWeekendRate, Integer hotelRating, Integer rewardWeekdayRate, Integer rewardWeekendRate)
     {
-        Hotel hotel = new Hotel(hotelName, regularWeekdayRate, regularWeekendRate, hotelRating);
+        Hotel hotel = new Hotel(hotelName, regularWeekdayRate, regularWeekendRate, hotelRating, rewardWeekdayRate, rewardWeekendRate);
         availabeHotels.put(hotelName, hotel);
         weekDayHotels.put(hotelName, regularWeekdayRate);
         weekEndHotels.put(hotelName, regularWeekendRate);
