@@ -124,7 +124,11 @@ public class HotelReservationSystem
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
         return (rateofHotels.get(b.get(0)));
-
     }
 
+    public static void bestRatedHotel(String startDate, String endDate)
+    {
+
+
+    }
 }

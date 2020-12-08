@@ -5,6 +5,11 @@ package com.testcase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import static com.hotelmanagement.HotelReservationSystem.*;
 
 
@@ -49,12 +54,31 @@ public class HotelReservationTest
 
     @Test
     public void givenDateRange_SearchHotel_ReturnCheapestBestRatedHotel()
-
     {
         addHotelToSystem("Lakewood", 110, 90,3);
         addHotelToSystem("Bridgewood",160, 50, 4);
         addHotelToSystem("Ridgewood", 220, 150, 5);
         String hName = cheapestBestRatedHotel("11Sep2020", "12Sep2020");
         Assertions.assertEquals("Lakewood", hName);
+    }
+
+    @Test
+    public void givenDateRange_SearchHotel_ReturnHotelName()
+    {
+        addHotelToSystem("Lakewood", 110, 90,3);
+        addHotelToSystem("Bridgewood",160, 50, 4);
+        addHotelToSystem("Ridgewood", 220, 150, 5);
+        List<String> a;
+        a = rateofHotels.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey())
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toList());
+        String hName = a.get(2);
+        long totaldays = totalDays("11Sep2020", "12Sep2020");
+        long weekdays = calcWeekDays("11Sep2020", "12Sep2020");
+        long weekends = totaldays - weekdays;
+        Long tPrice = (availabeHotels.get(hName).getRegularWeekdayRate()*weekdays)+(availabeHotels.get(hName).getRegularWeekendRate()*weekends);
+        System.out.println(hName + " & Total Rate = " + tPrice);
     }
 }
