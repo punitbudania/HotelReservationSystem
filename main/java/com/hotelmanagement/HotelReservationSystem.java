@@ -26,13 +26,13 @@ public class HotelReservationSystem
         String startDate = sc.nextLine();
         System.out.println("Enter End Date (in ddMMMyyyy format):");
         String endDate = sc.nextLine();
-        long totaldays = totalDays(startDate, endDate);
-        Integer weekdayPrice = lowestPrice(weekDayHotels);
-        String weekdayHotel = cheapestHotel(weekdayPrice, weekDayHotels);
-        Integer weekendPrice = lowestPrice(weekEndHotels);
-        String weekendHotel = cheapestHotel(weekendPrice, weekEndHotels);
-        long weekdays = calcWeekDays(startDate, endDate);
-        long weekendDays = totaldays - weekdays;
+        //long totaldays = totalDays(startDate, endDate);
+        //Integer weekdayPrice = lowestPrice(weekDayHotels);
+        //String weekdayHotel = cheapestHotel(weekdayPrice, weekDayHotels);
+        //Integer weekendPrice = lowestPrice(weekEndHotels);
+        //String weekendHotel = cheapestHotel(weekendPrice, weekEndHotels);
+        //long weekdays = calcWeekDays(startDate, endDate);
+        //long weekendDays = totaldays - weekdays;
     }
 
 
